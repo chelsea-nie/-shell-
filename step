@@ -1,0 +1,13 @@
+#ipmi
+DELL的<channel_no>是1，HP的是2 ，超微的是1，如果提示你输入channel_no 就输入就可以。 ipmitool -I open lan print [1或2]
+Centos下
+yum -y install OpenIPMI OpenIPMI-tools
+chkconfig ipmi on
+service ipmi start
+ipmitool lan set 1 ipsrc static       改为静态IP
+ipmitool -I open lan set 1 ipaddr 10.17.8.161
+ipmitool -I open lan set 1 defgw ipaddr 10.17.8.254
+ipmitool -I open lan set 1 netmask 255.255.255.0
+ipmitool -I open lan set 1 access on
+ipmitool -I open lan print 1         检查配置是否正确
+注意：redhat6.x下需要改yum源才可以使用yum安装OpenIPMI OpenIPMI-tools
